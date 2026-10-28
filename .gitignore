@@ -74,10 +74,8 @@ web_modules/
 
 # dotenv environment variable files
 .env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
+.env.*
+!.env.example
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -134,3 +132,36 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Secrets and credentials
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+secrets/
+.secrets/
+
+# Local database files, dumps and backups
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.sql.gz
+dump.sql
+db/backups/
+mysql-data/
+/data/
+
+# User uploads (receipts, attachments)
+/uploads/
+server/uploads/
+client/uploads/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
