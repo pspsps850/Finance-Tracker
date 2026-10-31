@@ -11,7 +11,7 @@ import { Modal } from '../components/Modal.jsx'
 import { Money } from '../components/Money.jsx'
 import { PageHeader } from '../components/PageHeader.jsx'
 import { useToast } from '../components/Toast.jsx'
-import { ACCOUNT_SUBTYPES, ACCOUNT_TYPES, SUBTYPE_LABELS } from '../lib/constants.js'
+import { ACCOUNT_SUBTYPES, ACCOUNT_TYPES } from '../lib/constants.js'
 import { centsToInput, parseMoney } from '../lib/money.js'
 import { errorMessage, fieldErrors } from '../lib/errors.js'
 import { useResource } from '../lib/useResource.js'
@@ -250,7 +250,8 @@ export function Accounts() {
                     <div>
                       <h3>{account.name}</h3>
                       <p className="account-card__meta">
-                        {SUBTYPE_LABELS[account.subtype] || account.subtype} · {account.currency}
+                        {ACCOUNT_SUBTYPES[account.type]?.find((item) => item.value === account.subtype)?.label
+                          ?? account.subtype} · {account.currency}
                       </p>
                     </div>
                     {account.is_active ? null : <span className="badge">Archived</span>}

@@ -3,6 +3,8 @@ import cookieParser from 'cookie-parser';
 import authRoutes from './routes/auth.js';
 import { errorHandler, notFound } from './middleware/error.js';
 
+import accountsRoutes from './routes/accounts.js';
+
 const app = express();
 
 if (process.env.TRUST_PROXY === 'true') {
@@ -29,6 +31,8 @@ app.use('/api/auth', (_req, res, next) => {
   res.set('Cache-Control', 'no-store');
   next();
 }, authRoutes);
+
+app.use('/api/accounts', accountsRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
