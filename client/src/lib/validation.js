@@ -54,7 +54,7 @@ export function validateSubscription(values) {
   if (parseMoney(values.amount) === null || parseMoney(values.amount) <= 0) {
     errors.amount = 'Enter an amount greater than zero.'
   }
-  if (!required(values.cycle)) errors.cycle = 'Choose a billing cycle.'
+  if (!required(values.billing_cycle)) errors.billing_cycle = 'Choose a billing cycle.'
   if (!required(values.next_due_date)) errors.next_due_date = 'Choose the next due date.'
   return errors
 }

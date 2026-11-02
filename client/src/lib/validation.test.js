@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { hasErrors, validateBudget, validateOtp, validateTransaction } from './validation.js'
+import {
+  hasErrors,
+  validateBudget,
+  validateOtp,
+  validateSubscription,
+  validateTransaction,
+} from './validation.js'
 
 describe('validateTransaction', () => {
   const base = {
@@ -50,6 +56,26 @@ describe('validateBudget', () => {
       limit: 'Set a limit greater than zero.',
     })
     expect(validateBudget({ category_id: '3', month: '2026-10', limit: '9000' })).toEqual({})
+  })
+})
+
+describe('validateSubscription', () => {
+  const base = {
+    name: 'Streaming',
+    amount: '12.99',
+    billing_cycle: 'yearly',
+    next_due_date: '2026-11-15',
+  }
+
+  it('accepts a complete subscription with any billing cycle', () => {
+    expect(validateSubscription(base)).toEqual({})
+    expect(validateSubscription({ ...base, billing_cycle: 'weekly' })).toEqual({})
+  })
+
+  it('requires a billing cycle', () => {
+    const errors = validateSubscription({ ...base, billing_cycle: '' })
+    expect(errors.billing_cycle).toBe('Choose a billing cycle.')
+    expect(hasErrors(errors)).toBe(true)
   })
 })
 

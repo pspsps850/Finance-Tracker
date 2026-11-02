@@ -96,7 +96,7 @@ function SubscriptionEditor({ subscription, accounts, categories, onClose, onSav
           <Field label="Amount" htmlFor="sub-amount" error={errors.amount}>
             <MoneyInput id="sub-amount" value={form.amount} onChange={(value) => update('amount')(value)} />
           </Field>
-          <Field label="Billing cycle" htmlFor="sub-cycle" error={errors.cycle}>
+          <Field label="Billing cycle" htmlFor="sub-cycle" error={errors.billing_cycle}>
             <Select
               id="sub-cycle"
               value={form.billing_cycle}

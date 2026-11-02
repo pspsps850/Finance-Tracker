@@ -728,7 +728,7 @@ async function route(method, path, body) {
         state.subscriptions.some((item) => item.account_id === account.id && !item.deleted_at) ||
         state.debts.some((item) => item.account_id === account.id && !item.deleted_at)
       if (referenced) {
-        fail(409, 'account_in_use', 'Archive it instead — transactions, goals or subscriptions still use this account.')
+        fail(409, 'account_in_use', 'Archive it instead — transactions, goals, subscriptions or debts still use this account.')
       }
       account.deleted_at = new Date().toISOString()
       save(state)

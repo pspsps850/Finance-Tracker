@@ -30,6 +30,40 @@ describe('signed-in routes', () => {
     expect(await screen.findByRole('heading', { level: 1, name: heading })).toBeTruthy()
   })
 
+  it('renders goal cards with formatted target amounts', async () => {
+    renderSignedIn('/goals')
+
+    expect(await screen.findByRole('heading', { level: 1, name: 'Goals' })).toBeTruthy()
+    expect(await screen.findByText('Emergency fund')).toBeTruthy()
+    expect(await screen.findByText(/of ₱150,000/)).toBeTruthy()
+  })
+
+  it('renders subscriptions without leaking debt records', async () => {
+    renderSignedIn('/subscriptions')
+
+    expect(await screen.findByText('Netflix')).toBeTruthy()
+    expect(screen.queryByText('Car loan')).toBeNull()
+    expect(screen.queryByText(/No route for GET \/api\/debts/)).toBeNull()
+  })
+
+  it('saves a subscription with the selected billing cycle', async () => {
+    const user = userEvent.setup()
+    renderSignedIn('/subscriptions')
+
+    await screen.findByText('Netflix')
+    await user.click(screen.getByRole('button', { name: 'New subscription' }))
+
+    const dialog = await screen.findByRole('dialog')
+    await user.type(within(dialog).getByLabelText('Name'), 'Disney Plus')
+    await user.type(within(dialog).getByLabelText('Amount'), '1499.00')
+    await user.selectOptions(within(dialog).getByLabelText('Billing cycle'), 'yearly')
+    await user.click(within(dialog).getByRole('button', { name: 'Track subscription' }))
+
+    expect(await screen.findByText('Subscription added.')).toBeTruthy()
+    expect(await screen.findByText('Disney Plus')).toBeTruthy()
+    expect(screen.queryByText('Choose a billing cycle.')).toBeNull()
+  })
+
   it('records a transaction through the composer and refreshes the ledger', async () => {
     const user = userEvent.setup()
     renderSignedIn('/transactions')

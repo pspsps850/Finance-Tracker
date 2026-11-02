@@ -15,7 +15,7 @@ import { useToast } from '../components/Toast.jsx'
 import { GOAL_STATUSES } from '../lib/constants.js'
 import { formatDate, relativeDays, todayKey } from '../lib/dates.js'
 import { errorMessage, fieldErrors } from '../lib/errors.js'
-import { centsToInput, parseMoney } from '../lib/money.js'
+import { centsToInput, formatMoney, parseMoney } from '../lib/money.js'
 import { useResource } from '../lib/useResource.js'
 import { hasErrors, validateGoal } from '../lib/validation.js'
 
