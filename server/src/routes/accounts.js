@@ -193,7 +193,7 @@ router.delete('/:id', async (req, res) => {
     throw new AppError(
       409,
       'account_in_use',
-      'Archive it instead — transactions, goals or subscriptions still use this account.',
+      'Archive it instead — transactions, goals, subscriptions or debts still use this account.',
     );
   }
 
