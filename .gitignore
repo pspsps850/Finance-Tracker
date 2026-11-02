@@ -140,8 +140,22 @@ dist
 *.pfx
 *.jks
 *.keystore
+*.kdbx
+*.p8
+*.ppk
 id_rsa*
 id_ed25519*
+id_ecdsa*
+id_dsa*
+.npmrc
+.netrc
+.git-credentials
+.pgpass
+.my.cnf
+.envrc
+*credentials*.json
+*service-account*.json
+serviceAccount*.json
 secrets/
 .secrets/
 
@@ -151,8 +165,12 @@ secrets/
 *.db
 *.dump
 *.sql.gz
+*.sql.bak
+*.sql.zip
+*.sql.7z
 dump.sql
 db/backups/
+db/dumps/
 mysql-data/
 /data/
 
@@ -160,6 +178,19 @@ mysql-data/
 /uploads/
 server/uploads/
 client/uploads/
+
+# Editor and local state
+.vscode/
+.idea/
+.history/
+*.swp
+*.swo
+*~
+
+# Local backup and patch leftovers
+*.bak
+*.orig
+*.rej
 
 # OS junk
 .DS_Store
